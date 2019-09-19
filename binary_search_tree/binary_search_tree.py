@@ -10,6 +10,7 @@
 #Observations
 # >= goes right
 # 
+import collections
 
 class BinarySearchTree:
   def __init__(self, value):  # Just using value, so key is value
@@ -73,6 +74,52 @@ class BinarySearchTree:
     cb(node.value)
     if node.left:
       node.left.for_each(cb)
-      
+
     if node.right:
       node.right.for_each(cb)
+
+
+# Day 2 Project------------------------------------------------------------------------
+
+    # Print all the values in order from low to high
+    # Hint:  Use a recursive, depth first traversal
+  def in_order_print(self, node):
+    if node.value is None:
+      return
+
+    if node.left is not None:
+      BinarySearchTree.in_order_print(self, node.left)
+
+    print(node)
+
+    if node.right is not None:
+      BinarySearchTree.in_order_print(self, node.right)           
+
+    # Print the value of every node, starting with the given node,
+    # in an iterative breadth first traversal
+  def bft_print(self, node):
+    visited, queue = set()
+    collections.deque([node])
+    
+    while queue:
+        vertex = queue.popleft()
+        for neighbor in self.value[vertex]:
+            if neighbor not in visited: 
+                visited.add(neighbor) 
+                queue.append(neighbor)
+
+    # Print the value of every node, starting with the given node,
+    # in an iterative depth first traversal
+  def dft_print(self, node):
+    pass
+
+    # STRETCH Goals -------------------------
+    # Note: Research may be required
+
+    # Print In-order recursive DFT
+  def pre_order_dft(self, node):
+    pass
+
+    # Print Post-order recursive DFT
+  def post_order_dft(self, node):
+    pass
